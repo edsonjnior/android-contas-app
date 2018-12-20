@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Gerenciador Financeiro - Gerfina</string>
+    <string name="lancamentos_title">Lista de lançamentos</string>
+</resources>
