@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Gerenciador Financeiro - Gerfina</string>
     <string name="lancamentos_title">Lista de lançamentos</string>
+    <string name="action_exibir_extrato">Exibir extrato</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>
