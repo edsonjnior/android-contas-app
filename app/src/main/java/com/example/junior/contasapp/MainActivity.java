@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String TIPO_ITEM = "com.example.junior.contasapp.item.tipo";
     public static final String VALOR_ITEM = "com.example.junior.contasapp.item.valor";
     public static final String DATA_ITEM = "com.example.junior.contasapp.item.data";
+    public static final String EXTRATO_RECEITAS = "com.example.junior.contasapp.extrato.receitas";
+    public static final String EXTRATO_DESPESAS = "com.example.junior.contasapp.extrato.despesas";
+    public static final String EXTRATO_SALDO = "com.example.junior.contasapp.extrato.saldo";
 
     private ListView listView;
     private LancamentoListAdapter adapter;
@@ -66,12 +69,29 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_exibir_extrato:
-                //displayToast(getString(R.string.action_exibir_extrato));
+                double totalCreditos = contabilizarLancamentos(TipoLancamento.CREDITO);
+                double totalDebitos = contabilizarLancamentos(TipoLancamento.DEBITO);
+                double saldo = totalCreditos - totalDebitos;
+
                 Intent intent = new Intent(getApplicationContext(), ExtratoActivity.class);
+                intent.putExtra(EXTRATO_DESPESAS, totalDebitos);
+                intent.putExtra(EXTRATO_RECEITAS, totalCreditos);
+                intent.putExtra(EXTRATO_SALDO, saldo);
+
                 startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private double contabilizarLancamentos(TipoLancamento tipoLancamento){
+        double total = 0d;
+        for (Lancamento l : lista){
+            if(l.getTipoLancamento().equals(tipoLancamento)){
+                total += l.getValor();
+            }
+        }
+        return total;
     }
 
     public void displayToast(String message) {
